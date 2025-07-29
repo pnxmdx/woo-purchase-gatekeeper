@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Woo Purchase Gatekeeper 2.1
  * Description: Restrict access to pages until purchase. Supports per-page rules, redirect or on-page message, Elementor-safe, and logging.
- * Version: 2.1
- * Author: Your Name
+ * Version: 2.2
+ * Author: PnxMdx
  */
 
 if (!defined('ABSPATH')) exit;
