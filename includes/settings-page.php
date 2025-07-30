@@ -1,7 +1,15 @@
 <?php
 add_action('admin_menu', function(){
-    add_submenu_page('woocommerce','Purchase Access Settings','Purchase Access','manage_woocommerce','wpg-settings','wpg_settings_page');
+    add_submenu_page(
+        'woocommerce',
+        'Purchase Access Settings',
+        'Purchase Access',
+        'manage_woocommerce',
+        'wpg-settings',
+        'wpg_settings_page'
+    );
 });
+
 add_action('admin_init', function(){
     register_setting('wpg_settings_group','wpg_restricted_page');
     register_setting('wpg_settings_group','wpg_required_product_ids');
@@ -9,7 +17,9 @@ add_action('admin_init', function(){
     register_setting('wpg_settings_group','wpg_restriction_mode');
     register_setting('wpg_settings_group','wpg_deny_mode');
     register_setting('wpg_settings_group','wpg_deny_message');
+    register_setting('wpg_settings_group','wpg_denied_page');
 });
+
 function wpg_settings_page(){ ?>
 <div class="wrap">
 <h1>Woo Purchase Gatekeeper Settings</h1>
@@ -31,7 +41,7 @@ function wpg_settings_page(){ ?>
 <td><?php wp_dropdown_pages(['name'=>'wpg_restricted_page','selected'=>get_option('wpg_restricted_page'),'show_option_none'=>'-- Select --']); ?></td>
 </tr>
 <tr>
-<th>Required Product IDs</th>
+<th>Required Product IDs (Global)</th>
 <td><input type="text" name="wpg_required_product_ids" value="<?php echo esc_attr(get_option('wpg_required_product_ids')); ?>" /><p class="description">Comma separated IDs</p></td>
 </tr>
 <tr>
@@ -46,6 +56,10 @@ function wpg_settings_page(){ ?>
 <tr>
 <th>Redirect URL</th>
 <td><input type="text" name="wpg_redirect_url" value="<?php echo esc_url(get_option('wpg_redirect_url',home_url())); ?>" size="60" /></td>
+</tr>
+<tr>
+<th>Access Denied Page</th>
+<td><?php wp_dropdown_pages(['name'=>'wpg_denied_page','selected'=>get_option('wpg_denied_page'),'show_option_none'=>'-- Select a Page --']); ?></td>
 </tr>
 <tr>
 <th>Access Denied Message</th>
